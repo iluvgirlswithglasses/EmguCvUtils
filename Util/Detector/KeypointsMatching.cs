@@ -20,7 +20,8 @@ namespace EmguCvUtils.Util.Detector
     */
     static class KeypointsMatching
     {
-        // self-written algorithms are written in the EmguCvDoodle repository
+        // self-written implementations of Harris Conner Detection and Keypoints Matching
+        // are written in the EmguCvDoodle repository
 
         static public void LibCompare(
             ref Image<Gray, byte> src, ref Image<Gray, byte> cmp, 
