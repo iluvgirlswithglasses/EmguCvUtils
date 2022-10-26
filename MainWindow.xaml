@@ -1,0 +1,17 @@
+﻿<Window x:Class="EmguCvUtils.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:EmguCvUtils"
+        mc:Ignorable="d"
+        Title="MainWindow" Height="450" Width="800">
+    <Grid>
+        <TextBox x:Name="IImg0F" HorizontalAlignment="Left" Margin="10,10,0,0" TextWrapping="Wrap" Text="D:\r\siglaz\EmguCvUtils\sample-images\st.png" VerticalAlignment="Top" Width="481" FontSize="16"/>
+        <TextBox x:Name="IImg1F" HorizontalAlignment="Left" Margin="10,38,0,0" TextWrapping="Wrap" Text="D:\r\siglaz\EmguCvUtils\sample-images\nd.png" VerticalAlignment="Top" Width="481" FontSize="16"/>
+        <TextBox x:Name="OImg0F" HorizontalAlignment="Left" Height="23" Margin="10,66,0,0" TextWrapping="Wrap" Text="D:\r\siglaz\EmguCvUtils\sample-images-o\sto.png" VerticalAlignment="Top" Width="481" FontSize="16"/>
+        <TextBox x:Name="OImg1F" HorizontalAlignment="Left" Height="23" Margin="10,94,0,0" TextWrapping="Wrap" Text="D:\r\siglaz\EmguCvUtils\sample-images-o\ndo.png" VerticalAlignment="Top" Width="481" FontSize="16"/>
+        <Button x:Name="CompareBtn" Content="Compare" Click="Compare" HorizontalAlignment="Left" Margin="371,122,0,0" VerticalAlignment="Top" FontSize="16" Width="120" RenderTransformOrigin="0.537,0.607"/>
+
+    </Grid>
+</Window>
