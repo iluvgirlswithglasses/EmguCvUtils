@@ -33,7 +33,7 @@ namespace EmguCvUtils
 
         private void Skeletonize(object sender, RoutedEventArgs e)
         {
-            UIHandler.SkeletonizationController.OnlineSkeletonize(IImg0F.Text);
+            UIHandler.SkeletonizationController.OnlineSkeletonize(IImg0F.Text, OImg0F.Text, OImg1F.Text);
         }
     }
 }

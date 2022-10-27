@@ -85,6 +85,7 @@
     <Compile Include="UIHandler\Tester.cs" />
     <Compile Include="Util\Binary\BinaryEffect.cs" />
     <Compile Include="Util\Binary\Skeletonization.cs" />
+    <Compile Include="Util\Binary\SkeletonVariant.cs" />
     <Compile Include="Util\Detector\KeypointsMatching.cs" />
     <Page Include="MainWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
