@@ -1,10 +1,10 @@
 ﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
 using Emgu.CV;
 using Emgu.CV.Structure;
-
-// getting rid of scan() seems like a terrible idea,
-// as it oppose the general idea of Hilditch's algorithm
-// i'll be looking for any way to make this better than it currently is
 
 namespace EmguCvUtils.Util.Binary
 {
