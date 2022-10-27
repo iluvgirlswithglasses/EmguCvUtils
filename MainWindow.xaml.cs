@@ -28,7 +28,12 @@ namespace EmguCvUtils
 
         private void Compare(object sender, RoutedEventArgs e)
         {
-            UIHandler.ImageComparator.OfflineLibCompare(IImg0F.Text, IImg1F.Text, OImg0F.Text, OImg1F.Text);
+            UIHandler.ImageComparationController.OfflineLibCompare(IImg0F.Text, IImg1F.Text, OImg0F.Text, OImg1F.Text);
+        }
+
+        private void Skeletonize(object sender, RoutedEventArgs e)
+        {
+            UIHandler.SkeletonizationController.OnlineSkeletonize(IImg0F.Text);
         }
     }
 }

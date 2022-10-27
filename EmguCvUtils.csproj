@@ -80,8 +80,11 @@
     </ApplicationDefinition>
     <Compile Include="Drawer\Dot.cs" />
     <Compile Include="Type\Pair.cs" />
-    <Compile Include="UIHandler\ImageComparator.cs" />
+    <Compile Include="UIHandler\ImageComparationController.cs" />
+    <Compile Include="UIHandler\SkeletonizationController.cs" />
     <Compile Include="UIHandler\Tester.cs" />
+    <Compile Include="Util\Binary\BinaryEffect.cs" />
+    <Compile Include="Util\Binary\Skeletonization.cs" />
     <Compile Include="Util\Detector\KeypointsMatching.cs" />
     <Page Include="MainWindow.xaml">
       <Generator>MSBuild:Compile</Generator>

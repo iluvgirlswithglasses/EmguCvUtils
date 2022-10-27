@@ -9,7 +9,7 @@ using EmguCvUtils.Util.Detector;
 
 namespace EmguCvUtils.UIHandler
 {
-    internal class ImageComparator
+    internal class ImageComparationController
     {
         static public void OfflineLibCompare(string sti, string ndi, string sto, string ndo)
         {
