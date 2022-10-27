@@ -1,12 +1,10 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using Emgu.CV;
 using Emgu.CV.Structure;
 
-// TODO: make shf[] faster
+// getting rid of scan() seems like a terrible idea,
+// as it oppose the general idea of Hilditch's algorithm
+// i'll be looking for any way to make this better than it currently is
 
 namespace EmguCvUtils.Util.Binary
 {
@@ -47,30 +45,19 @@ namespace EmguCvUtils.Util.Binary
             Img = src.Copy();
             adj = new byte[Img.Height, Img.Width];
             shf = new byte[Img.Height, Img.Width];
-
-            // initialize adj[]
-            for (int y = 1; y < Img.Height - 1; y++)
-            for (int x = 1; x < Img.Width - 1; x++) 
-            {
-                if (Img[y, x].Intensity > EPS) 
-                {
-                    // if this is foreground
-                    // --> each neighbor of (y, x) has its adj value increased by 1
-                    for (int i = 0; i < 8; i++)
-                        adj[y + DY[i], x + DX[i]]++;
-                }
-            }
         }
 
         public void Apply() 
         {
             int iter = 0;
             bool updated;
+            // is there really a way to make each iteration
+            // in this do-while run in O(WH)
             do
             {
                 iter++;
                 updated = false;
-                scanShf();
+                scan();
                 for (int y = 1; y < Img.Height - 1; y++)
                 for (int x = 1; x < Img.Width - 1; x++)
                 {
@@ -78,8 +65,6 @@ namespace EmguCvUtils.Util.Binary
                     {
                         updated = true;
                         Img[y, x] = new Gray(0);
-                        // update this pixel's neighbors
-                        for (int i = 0; i < 8; i++) adj[y + DY[i], x + DX[i]]--;
                     }
                 }
             } while (updated);
@@ -102,13 +87,24 @@ namespace EmguCvUtils.Util.Binary
         }
 
         // update shf[]
-        private void scanShf()
+        private void scan()
         {
+            // memset
             for (int y = 1; y < Img.Height - 1; y++)
             for (int x = 1; x < Img.Width - 1; x++) 
             {
-                if (Img[y, x].Intensity > EPS) {
-                    shf[y, x] = 0;
+                shf[y, x] = adj[y, x] = 0;
+            }
+            //
+            for (int y = 1; y < Img.Height - 1; y++)
+            for (int x = 1; x < Img.Width - 1; x++) 
+            {
+                if (Img[y, x].Intensity > EPS) 
+                {
+                    // check neighbors
+                    for (int i = 0; i < 8; i++)
+                        adj[y + DY[i], x + DX[i]]++;
+
                     // detect (0, 1) patterns
                     for (int i = 0; i < 7; i++)
                         shf[y, x] += match01(y, x, i, i+1);
@@ -117,7 +113,8 @@ namespace EmguCvUtils.Util.Binary
             }
         }
 
-        private byte match01(int y, int x, int a, int b) {
+        private byte match01(int y, int x, int a, int b) 
+        {
             return Convert.ToByte(Img[y + DY[a], x + DX[a]].Intensity + EPS < Img[y + DY[b], x + DX[b]].Intensity);
         }
     }
