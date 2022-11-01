@@ -26,14 +26,17 @@ namespace EmguCvUtils
             InitializeComponent();
         }
 
-        private void Compare(object sender, RoutedEventArgs e)
+        private void headerLoaded(object sender, RoutedEventArgs args)
         {
-            UIHandler.ImageComparationController.OfflineLibCompare(IImg0F.Text, IImg1F.Text, OImg0F.Text, OImg1F.Text);
+            initHeader(sender as DockPanel);
         }
 
-        private void Skeletonize(object sender, RoutedEventArgs e)
+        private void initHeader(DockPanel header)
         {
-            UIHandler.SkeletonizationController.OnlineSkeletonize(IImg0F.Text, OImg0F.Text, OImg1F.Text);
+            header.MouseLeftButtonDown += (s, e) =>
+            {
+                DragMove();
+            };
         }
     }
 }

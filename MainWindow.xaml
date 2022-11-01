@@ -5,13 +5,45 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:EmguCvUtils"
         mc:Ignorable="d"
-        Title="MainWindow" Height="450" Width="800">
-    <Grid>
-        <TextBox x:Name="IImg0F" HorizontalAlignment="Left" Margin="10,10,0,0" TextWrapping="Wrap" Text="D:\r\siglaz\EmguCvUtils\sample-images\st.png" VerticalAlignment="Top" Width="481" FontSize="16"/>
-        <TextBox x:Name="IImg1F" HorizontalAlignment="Left" Margin="10,38,0,0" TextWrapping="Wrap" Text="D:\r\siglaz\EmguCvUtils\sample-images\nd.png" VerticalAlignment="Top" Width="481" FontSize="16"/>
-        <TextBox x:Name="OImg0F" HorizontalAlignment="Left" Height="23" Margin="10,66,0,0" TextWrapping="Wrap" Text="D:\r\siglaz\EmguCvUtils\sample-images-o\sto.png" VerticalAlignment="Top" Width="481" FontSize="16"/>
-        <TextBox x:Name="OImg1F" HorizontalAlignment="Left" Height="23" Margin="10,94,0,0" TextWrapping="Wrap" Text="D:\r\siglaz\EmguCvUtils\sample-images-o\ndo.png" VerticalAlignment="Top" Width="481" FontSize="16"/>
-        <Button x:Name="CompareBtn" Content="Compare" Click="Compare" HorizontalAlignment="Left" Margin="10,146,0,0" VerticalAlignment="Top" FontSize="16" Width="120" RenderTransformOrigin="0.537,0.607"/>
-        <Button x:Name="SkeletonizeBtn" Content="Skeletonize" Click="Skeletonize" HorizontalAlignment="Left" Margin="10,176,0,0" VerticalAlignment="Top" FontSize="16" Width="120" RenderTransformOrigin="0.537,0.607"/>
-    </Grid>
+        Title="MainWindow" 
+        Height="675" Width="1200"
+        WindowStyle="None"
+        Background="Transparent"
+        AllowsTransparency="True">
+
+    <Border
+        Background="#040410"
+        CornerRadius="20">
+        <Grid ClipToBounds="False">
+            <Grid.RowDefinitions>
+                <!-- nav -->
+                <RowDefinition Height="40"></RowDefinition>
+                <RowDefinition Height="635" />
+            </Grid.RowDefinitions>
+            
+            <Grid.ColumnDefinitions>
+                <!-- img previewer -->
+                <ColumnDefinition Width="1000"></ColumnDefinition>
+                <ColumnDefinition />
+            </Grid.ColumnDefinitions>
+
+            <DockPanel
+                Grid.Row="0"
+                Grid.Column="0"
+                Loaded="headerLoaded">
+                <TextBlock 
+                    x:Name="header" 
+                    Text="darkkcyan" 
+                    VerticalAlignment="Center"
+                    Foreground="DarkCyan" 
+                    FontSize="22"
+                    Padding="25, 0, 0, 0"></TextBlock>
+            </DockPanel>
+
+            <Image
+                Grid.Row="1"
+                Grid.Column="0"
+                x:Name="presenter"></Image>
+        </Grid>
+    </Border>
 </Window>
