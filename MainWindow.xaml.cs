@@ -13,6 +13,10 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using Emgu.CV;
+using Emgu.CV.Structure;
+using EmguCvUtils.UIHandler;
+using static Emgu.CV.BitmapExtension;
 
 namespace EmguCvUtils
 {
@@ -21,11 +25,21 @@ namespace EmguCvUtils
     /// </summary>
     public partial class MainWindow : Window
     {
+        WorkingImage canvas = new WorkingImage();
+
+        /** @sys */
         public MainWindow()
         {
             InitializeComponent();
+            mainWindow.KeyDown += new KeyEventHandler(onKeyDown);
         }
 
+        private void display(BitmapSource bm)
+        {
+            presenter.Source = bm;
+        }
+
+        /** @on-loaded */
         private void headerLoaded(object sender, RoutedEventArgs args)
         {
             initHeader(sender as DockPanel);
@@ -37,6 +51,50 @@ namespace EmguCvUtils
             {
                 DragMove();
             };
+        }
+
+        /** @btn-handlers */
+        private void close(object sender, RoutedEventArgs args)
+        {
+            Close();
+        }
+
+        private void openFile(object sender, RoutedEventArgs args)
+        {
+            var dialog = new Microsoft.Win32.OpenFileDialog();
+            dialog.FileName = "Open Picture";
+
+            bool? res = dialog.ShowDialog();
+            if (res == true)
+            {
+                canvas.LoadNewImage(new Image<Bgr, byte>(dialog.FileName));
+                header.Text = dialog.FileName;
+                display(canvas.ToBitMap());
+                Console.WriteLine("src = {0}, {1}", canvas.canvas.Height, canvas.canvas.Width);
+            }
+        }
+
+        /** @cursor-tracker */
+        private void onKeyDown(object sender, KeyEventArgs args)
+        {
+            // zoom
+            switch (args.Key)
+            {
+                case Key.OemPlus:
+                    zoomRequest(-0.2);
+                    break;
+                case Key.OemMinus:
+                    zoomRequest(+0.2);
+                    break;
+            }
+        }
+
+        private void zoomRequest(double mod)
+        {
+            double dy = Mouse.GetPosition(presenter).Y / presenter.ActualHeight;
+            double dx = Mouse.GetPosition(presenter).X / presenter.ActualWidth;
+            canvas.SetZoom(dy, dx, mod);
+            display(canvas.ToBitMap());
         }
     }
 }
