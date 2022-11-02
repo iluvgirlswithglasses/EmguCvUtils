@@ -59,10 +59,10 @@ namespace EmguCvUtils.UIHandler
                 nxtWidth,
                 nxtHeight
             );
-            updateZoomImage();
+            updatePresenter();
         }
 
-        private void updateZoomImage()
+        private void updatePresenter()
         {
             isCircular = false;
             for (int y = 0; y < presenter.Height; y++)
@@ -88,7 +88,7 @@ namespace EmguCvUtils.UIHandler
             if (isCircular)
             {
                 isCircular = false;
-                updateZoomImage();
+                updatePresenter();
                 return;
             }
             isCircular = true;
