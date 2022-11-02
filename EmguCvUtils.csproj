@@ -82,7 +82,8 @@
       <DependentUpon>ContrastWindow.xaml</DependentUpon>
     </Compile>
     <Compile Include="Drawer\Dot.cs" />
-    <Compile Include="Effect\ContrastEffect.cs" />
+    <Compile Include="Util\CircularCompress.cs" />
+    <Compile Include="Util\Effect\ContrastEffect.cs" />
     <Compile Include="Type\Pair.cs" />
     <Compile Include="UIHandler\BitmapSourceConvert.cs" />
     <Compile Include="UIHandler\WorkingImage.cs" />

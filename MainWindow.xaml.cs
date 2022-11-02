@@ -17,6 +17,7 @@ using Emgu.CV;
 using Emgu.CV.Structure;
 using EmguCvUtils.Dialog;
 using EmguCvUtils.UIHandler;
+using EmguCvUtils.Util;
 
 namespace EmguCvUtils
 {
@@ -26,6 +27,8 @@ namespace EmguCvUtils
     public partial class MainWindow : Window
     {
         WorkingImage canvas = new WorkingImage();
+
+        bool isCircular = false;
 
         /** @sys */
         public MainWindow()
@@ -76,7 +79,18 @@ namespace EmguCvUtils
         /** @utils-btn-handlers */
         private void circularCompress(object sender, RoutedEventArgs args)
         {
-            canvas.CircularCompress();
+            if (isCircular)
+            {
+                // reset
+                canvas.UpdatePresenter();
+                isCircular = false;
+            }
+            else
+            {
+                // apply circular effect
+                CircularCompress.Apply(ref canvas.presenter);
+                isCircular = true;
+            }
             display(canvas.ToBitMap());
         }
 
