@@ -14,7 +14,6 @@
 
     <Border
         Background="Black"
-        CornerRadius="20"
         ClipToBounds="True">
         <Grid ClipToBounds="True">
             <Grid.RowDefinitions>

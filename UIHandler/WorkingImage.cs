@@ -8,10 +8,10 @@ namespace EmguCvUtils.UIHandler
     internal class WorkingImage
     {
         public Image<Bgr, byte> canvas;
-        Image<Bgr, byte> zoomed;
+        Image<Bgr, byte> presenter;
 
         double zoomScale = 1.0;
-        int zoomY = 0, zoomX = 0;
+        int presenterY0 = 0, presenterX0 = 0;
 
         public WorkingImage()
         {
@@ -21,65 +21,59 @@ namespace EmguCvUtils.UIHandler
         public void LoadNewImage(Image<Bgr, byte> img)
         {
             canvas = img;
-            zoomed = img;
+            presenter = img;
         }
 
         public BitmapSource ToBitMap()
         {
-            return BitmapSourceConvert.ToBitmapSource(ref zoomed);
+            return BitmapSourceConvert.ToBitmapSource(ref presenter);
         }
 
         /** @zooming */
         public void SetZoom(double dy, double dx, double mod)
         {
-            if (!inRange(zoomScale + mod, 0.0, 1.0))
-                return;
             zoomScale += mod;
-            zoomScale = Math.Max(0.0, zoomScale);
+            fixRange(ref zoomScale, 0.1, 1.0);
 
             // the center
-            zoomY = Convert.ToInt32(dy * zoomed.Height) + zoomY;
-            zoomX = Convert.ToInt32(dx * zoomed.Width) + zoomX;
+            presenterY0 = Convert.ToInt32(dy * presenter.Height) + presenterY0;
+            presenterX0 = Convert.ToInt32(dx * presenter.Width) + presenterX0;
 
-            // translate the center to top-left coner
+            // translate from center to top-left corner
             int nxtHeight = Convert.ToInt32(canvas.Height * zoomScale);
             int nxtWidth = Convert.ToInt32(canvas.Width * zoomScale);
-            zoomY -= nxtHeight / 2;
-            zoomX -= nxtWidth / 2;
+            presenterY0 -= nxtHeight / 2;
+            presenterX0 -= nxtWidth / 2;
 
             // make this safe
-            zoomY = Math.Max(0, zoomY);
-            zoomX = Math.Max(0, zoomX);
+            fixRange(ref presenterY0, 0, canvas.Height - nxtHeight);
+            fixRange(ref presenterX0, 0, canvas.Width - nxtWidth);
 
             //
-            if (zoomY + nxtHeight > canvas.Height)
-                zoomY = canvas.Height - nxtHeight;
-            if (zoomX + nxtWidth > canvas.Width)
-                zoomX = canvas.Width - nxtWidth;
-            //
-            zoomed = new Image<Bgr, byte>(
+            presenter = new Image<Bgr, byte>(
                 nxtWidth,
                 nxtHeight
             );
-            Console.WriteLine("{0}, {1}, {2}, {3}", zoomY, zoomX, zoomed.Height, zoomed.Width);
             updateZoomImage();
         }
 
         private void updateZoomImage()
         {
-            for (int y = 0; y < zoomed.Height; y++)
-                for (int x = 0; x < zoomed.Width; x++)
-                    zoomed[y, x] = canvas[zoomY + y, zoomX + x];
+            for (int y = 0; y < presenter.Height; y++)
+                for (int x = 0; x < presenter.Width; x++)
+                    presenter[y, x] = canvas[presenterY0 + y, presenterX0 + x];
         }
 
-        private bool isSafe(double dy, double dx, double mod)
+        private void fixRange(ref double x, double l, double r)
         {
-            return inRange(zoomScale + mod, 0.0, 1.0) && inRange(dy, 0.0, 1.0) && inRange(dx, 0.0, 1.0);
+            x = Math.Max(l, x);
+            x = Math.Min(r, x);
         }
 
-        private bool inRange(double x, double l, double r)
+        private void fixRange(ref int x, int l, int r)
         {
-            return l <= x && x <= r;
+            x = Math.Max(l, x);
+            x = Math.Min(r, x);
         }
     }
 }

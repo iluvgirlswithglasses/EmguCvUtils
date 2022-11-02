@@ -74,17 +74,17 @@ namespace EmguCvUtils
             }
         }
 
-        /** @cursor-tracker */
+        /** @keyboard */
         private void onKeyDown(object sender, KeyEventArgs args)
         {
             // zoom
             switch (args.Key)
             {
                 case Key.OemPlus:
-                    zoomRequest(-0.2);
+                    zoomRequest(-0.15);
                     break;
                 case Key.OemMinus:
-                    zoomRequest(+0.2);
+                    zoomRequest(+0.15);
                     break;
             }
         }
