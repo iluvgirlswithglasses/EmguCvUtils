@@ -15,8 +15,8 @@ using System.Windows.Navigation;
 using System.Windows.Shapes;
 using Emgu.CV;
 using Emgu.CV.Structure;
+using EmguCvUtils.Dialog;
 using EmguCvUtils.UIHandler;
-using static Emgu.CV.BitmapExtension;
 
 namespace EmguCvUtils
 {
@@ -100,6 +100,13 @@ namespace EmguCvUtils
             double dy = Mouse.GetPosition(presenter).Y / presenter.ActualHeight;
             double dx = Mouse.GetPosition(presenter).X / presenter.ActualWidth;
             canvas.SetZoom(dy, dx, mod);
+            display(canvas.ToBitMap());
+        }
+
+        private void openContrastEditor(object sender, RoutedEventArgs e)
+        {
+            ContrastWindow dialog = new ContrastWindow(ref canvas);
+            dialog.ShowDialog();
             display(canvas.ToBitMap());
         }
     }

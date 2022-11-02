@@ -78,7 +78,11 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="Dialog\ContrastWindow.xaml.cs">
+      <DependentUpon>ContrastWindow.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Drawer\Dot.cs" />
+    <Compile Include="Effect\ContrastEffect.cs" />
     <Compile Include="Type\Pair.cs" />
     <Compile Include="UIHandler\BitmapSourceConvert.cs" />
     <Compile Include="UIHandler\WorkingImage.cs" />
@@ -86,6 +90,10 @@
     <Compile Include="Util\Binary\Skeletonization.cs" />
     <Compile Include="Util\Binary\SkeletonVariant.cs" />
     <Compile Include="Util\Detector\KeypointsMatching.cs" />
+    <Page Include="Dialog\ContrastWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="MainWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
@@ -139,5 +147,6 @@
       <Version>4.6.0.5131</Version>
     </PackageReference>
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

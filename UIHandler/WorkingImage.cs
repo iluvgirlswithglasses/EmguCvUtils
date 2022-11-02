@@ -6,10 +6,10 @@ using Emgu.CV.Structure;
 
 namespace EmguCvUtils.UIHandler
 {
-    internal class WorkingImage
+    public class WorkingImage
     {
         public Image<Bgr, byte> canvas;
-        Image<Bgr, byte> presenter;
+        public Image<Bgr, byte> presenter;
         bool isCircular = false;
 
         double zoomScale = 1.0;
@@ -59,10 +59,10 @@ namespace EmguCvUtils.UIHandler
                 nxtWidth,
                 nxtHeight
             );
-            updatePresenter();
+            UpdatePresenter();
         }
 
-        private void updatePresenter()
+        public void UpdatePresenter()
         {
             isCircular = false;
             for (int y = 0; y < presenter.Height; y++)
@@ -87,8 +87,7 @@ namespace EmguCvUtils.UIHandler
         {
             if (isCircular)
             {
-                isCircular = false;
-                updatePresenter();
+                UpdatePresenter();
                 return;
             }
             isCircular = true;
