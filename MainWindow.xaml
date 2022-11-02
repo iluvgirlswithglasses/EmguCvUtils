@@ -13,8 +13,9 @@
         AllowsTransparency="True">
 
     <Border
-        Background="Black"
-        ClipToBounds="True">
+        ClipToBounds="True"
+        CornerRadius="20"
+        Background="#0e1215">
         <Grid ClipToBounds="True">
             <Grid.RowDefinitions>
                 <!-- nav -->
@@ -36,9 +37,9 @@
                 <TextBlock 
                     x:Name="header"  
                     VerticalAlignment="Center"
-                    Foreground="DarkCyan" 
-                    FontSize="22"
-                    Padding="25, 0, 0, 0"></TextBlock>
+                    Padding="25, 0, 0, 0"
+                    FontSize="18"
+                    Foreground="#e0e0e0"></TextBlock>
             </DockPanel>
 
             <Button
@@ -51,7 +52,7 @@
                 FontSize="35"
                 Background="Transparent"
                 Foreground="Red"
-                BorderThickness="0" 
+                BorderThickness="0"
                 Margin="122,-7,20,0"
                 ></Button>
 
@@ -69,16 +70,25 @@
                 Grid.Row="1"
                 Grid.Column="1"
                 Padding="10">
-                <Grid>
-                    <Grid.RowDefinitions>
-                        <RowDefinition Height="40" />
-                    </Grid.RowDefinitions>
-
-                    <Button
-                    Click="openFile"
-                    Content="Open File"
-                    FontSize="22"></Button>
-                </Grid>
+                <DockPanel LastChildFill="False">
+                    <!-- utility -->
+                    <StackPanel Orientation="Vertical" DockPanel.Dock="Top" >
+                        <Button
+                            Click="circularCompress"
+                            Content="Circular View"
+                            FontSize="18" />
+                    </StackPanel>
+                    <!-- file manager -->
+                    <StackPanel Orientation="Vertical" DockPanel.Dock="Bottom" >
+                        <Button
+                            Click="openFile"
+                            Content="Open File"
+                            FontSize="18" />
+                        <Button 
+                            Content="Save as"
+                            FontSize="18"/>
+                    </StackPanel>
+                </DockPanel>
             </Border>
         </Grid>
     </Border>

@@ -53,7 +53,7 @@ namespace EmguCvUtils
             };
         }
 
-        /** @btn-handlers */
+        /** @file-btn-handlers */
         private void close(object sender, RoutedEventArgs args)
         {
             Close();
@@ -70,8 +70,14 @@ namespace EmguCvUtils
                 canvas.LoadNewImage(new Image<Bgr, byte>(dialog.FileName));
                 header.Text = dialog.FileName;
                 display(canvas.ToBitMap());
-                Console.WriteLine("src = {0}, {1}", canvas.canvas.Height, canvas.canvas.Width);
             }
+        }
+
+        /** @utils-btn-handlers */
+        private void circularCompress(object sender, RoutedEventArgs args)
+        {
+            canvas.CircularCompress();
+            display(canvas.ToBitMap());
         }
 
         /** @keyboard */
