@@ -26,7 +26,7 @@ namespace EmguCvUtils
     /// </summary>
     public partial class MainWindow : Window
     {
-        WorkingImage canvas = new WorkingImage();
+        WorkingImage<Bgr> canvas = new WorkingImage<Bgr>();
 
         bool isCircular = false;
 

@@ -1,15 +1,13 @@
 ﻿using System;
 using System.Windows.Media.Imaging;
-using System.Windows.Media.Media3D;
 using Emgu.CV;
-using Emgu.CV.Structure;
 
 namespace EmguCvUtils.UIHandler
 {
-    public class WorkingImage
+    public class WorkingImage<Color> where Color: struct, Emgu.CV.IColor
     {
-        public Image<Bgr, byte> canvas;
-        public Image<Bgr, byte> presenter;
+        public Image<Color, byte> canvas;
+        public Image<Color, byte> presenter;
 
         double zoomScale = 1.0;
         int presenterY0 = 0, presenterX0 = 0;
@@ -19,7 +17,7 @@ namespace EmguCvUtils.UIHandler
 
         }
 
-        public void LoadNewImage(Image<Bgr, byte> img)
+        public void LoadNewImage(Image<Color, byte> img)
         {
             canvas = img.Copy();
             presenter = img.Copy();
@@ -27,7 +25,7 @@ namespace EmguCvUtils.UIHandler
 
         public BitmapSource ToBitMap()
         {
-            return BitmapSourceConvert.ToBitmapSource(ref presenter);
+            return BitmapSourceConvert.ToBitmapSource<Color>(ref presenter);
         }
 
         /** @zooming */
@@ -54,7 +52,7 @@ namespace EmguCvUtils.UIHandler
             fixRange(ref presenterX0, 0, canvas.Width - nxtWidth);
 
             //
-            presenter = new Image<Bgr, byte>(
+            presenter = new Image<Color, byte>(
                 nxtWidth,
                 nxtHeight
             );

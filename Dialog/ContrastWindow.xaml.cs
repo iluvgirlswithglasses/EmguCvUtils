@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Windows;
+using Emgu.CV.Structure;
 using EmguCvUtils.UIHandler;
 using static EmguCvUtils.Effect.ContrastEffect;
 
@@ -10,9 +11,9 @@ namespace EmguCvUtils.Dialog
     /// </summary>
     public partial class ContrastWindow : Window
     {
-        WorkingImage canvas;
+        WorkingImage<Bgr> canvas;
 
-        public ContrastWindow(ref WorkingImage c)
+        public ContrastWindow(ref WorkingImage<Bgr> c)
         {
             canvas = c;
             InitializeComponent();

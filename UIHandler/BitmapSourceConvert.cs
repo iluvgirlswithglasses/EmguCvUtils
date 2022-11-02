@@ -12,7 +12,7 @@ namespace EmguCvUtils.UIHandler
         [DllImport("gdi32")]
         private static extern int DeleteObject(IntPtr o);
 
-        public static BitmapSource ToBitmapSource(ref Image<Bgr, byte> image)
+        public static BitmapSource ToBitmapSource<Color>(ref Image<Color, byte> image) where Color : struct, Emgu.CV.IColor
         {
             using (System.Drawing.Bitmap source = image.ToBitmap())
             {
