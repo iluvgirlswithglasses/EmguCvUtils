@@ -6,6 +6,7 @@ using System.Windows.Media.Imaging;
 using Emgu.CV;
 using Emgu.CV.Structure;
 using EmguCvUtils.UIHandler;
+using EmguCvUtils.Util.Binary;
 using EmguCvUtils.Util.Detector;
 using static EmguCvUtils.Effect.ContrastEffect;
 
@@ -19,10 +20,18 @@ namespace EmguCvUtils.Dialog
         Image<Bgr, byte> src;
         WorkingImage<Gray> canvas = new WorkingImage<Gray>();
 
+        bool isBinary = false;
+
         public GrayWindow(ref Image<Bgr, byte> c)
         {
             src = c;
             InitializeComponent();
+        }
+
+        private void qdisplay()
+        {
+            canvas.UpdatePresenter();
+            display(canvas.ToBitMap());
         }
 
         private void display(BitmapSource bm)
@@ -57,6 +66,7 @@ namespace EmguCvUtils.Dialog
 
         private void reload(object sender, RoutedEventArgs args)
         {
+            isBinary = false;
             canvas.LoadNewImage(src.Copy().Convert<Gray, byte>());
             display(canvas.ToBitMap());
         }
@@ -98,15 +108,61 @@ namespace EmguCvUtils.Dialog
         private void applyXSobel(object sender, RoutedEventArgs args)
         {
             SobelOperator.Apply(ref canvas.canvas);
-            canvas.UpdatePresenter();
-            display(canvas.ToBitMap());
+            qdisplay();
         }
 
         private void applyXYSobel(object sender, RoutedEventArgs args)
         {
             SobelOperator.Apply(ref canvas.canvas, 1);
-            canvas.UpdatePresenter();
+            qdisplay();
+        }
+
+        private void applyHarris(object sender, RoutedEventArgs args)
+        {
+            HarrisCorner.Apply(ref canvas.canvas);
+            qdisplay();
+        }
+
+        /** @binary effect */
+
+        private void applyBinary(object sender, RoutedEventArgs args)
+        {
+            var s = src.Copy().Convert<Gray, byte>();
+            BinaryEffect.Apply(ref s, ref canvas.canvas, binaryThreshold.Value);
+            qdisplay();
+            isBinary = true;
+        }
+
+        private void reverseBinary(object sender, RoutedEventArgs args)
+        {
+            if (!isBinary) return;
+            BinaryEffect.Reverse(ref canvas.canvas);
+            qdisplay();
+        }
+
+        private void skeletonization(object sender, RoutedEventArgs args)
+        {
+            if (!isBinary) return;
+            var skele = new Skeletonization(ref canvas.canvas);
+            skele.Apply();
+            canvas.LoadNewImage(skele.Img);
             display(canvas.ToBitMap());
+        }
+
+        private void altSkeletonization(object sender, RoutedEventArgs args)
+        {
+            if (!isBinary) return;
+            var skele = new SkeletonVariant(ref canvas.canvas);
+            skele.Apply();
+            canvas.LoadNewImage(skele.Img);
+            display(canvas.ToBitMap());
+        }
+
+        private void applySkeletonCorner(object sender, RoutedEventArgs args)
+        {
+            if (!isBinary) return;
+            SkeletonCorner.Apply(ref canvas.canvas);
+            qdisplay();
         }
     }
 }

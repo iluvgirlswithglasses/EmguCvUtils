@@ -79,14 +79,47 @@
                             Click="reload"
                             Content="Reload"
                             FontSize="18" />
+                        <!-- Sobel Operator -->
                         <Button
                             Click="applyXSobel"
                             Content="X-Axis Sobel"
-                            FontSize="18" />
+                            FontSize="18"
+                            Margin="0 10 0 0" />
                         <Button
                             Click="applyXYSobel"
                             Content="XY-Axis Sobel"
                             FontSize="18" />
+                        <!-- Harris -->
+                        <Button
+                            Click="applyHarris"
+                            Content="Harris Corner"
+                            FontSize="18"
+                            Margin="0 10 0 0"/>
+                        <!-- Binary -->
+                        <TextBlock Text="Binary Threshold" Foreground="#e0e0e0" FontSize="18" Margin="0 20 0 0" />
+                        <Slider x:Name="binaryThreshold"
+                            Maximum="255" 
+                            Value="150"
+                            TickPlacement="BottomRight" 
+                            TickFrequency="5"
+                            Margin="0 10 0 10" />
+                        <Button Content="Apply Binary Effect" FontSize="18" Click="applyBinary" />
+                        <Button Content="Reverse Binary Effect" FontSize="18" Click="reverseBinary" />
+                        <!-- Skeletonize -->
+                        <Button
+                            Click="skeletonization"
+                            Content="Skeletonization"
+                            FontSize="18"
+                            Margin="0 10 0 0" />
+                        <Button
+                            Click="altSkeletonization"
+                            Content="Alt Skeleton"
+                            FontSize="18"/>
+                        <Button
+                            Click="applySkeletonCorner"
+                            Content="Skeleton Corner"
+                            FontSize="18" />
+
                     </StackPanel>
 
                     <!-- file manager -->

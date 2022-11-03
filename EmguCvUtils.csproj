@@ -78,6 +78,7 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="Algorithm\Segtree\UpdNQry1\Segtree.cs" />
     <Compile Include="Dialog\ContrastWindow.xaml.cs">
       <DependentUpon>ContrastWindow.xaml</DependentUpon>
     </Compile>
@@ -85,7 +86,10 @@
       <DependentUpon>GrayWindow.xaml</DependentUpon>
     </Compile>
     <Compile Include="Drawer\Dot.cs" />
+    <Compile Include="Util\Binary\Dilation.cs" />
+    <Compile Include="Util\Binary\SkeletonCorner.cs" />
     <Compile Include="Util\CircularCompress.cs" />
+    <Compile Include="Util\Detector\HarrisCorner.cs" />
     <Compile Include="Util\Detector\SobelOperator.cs" />
     <Compile Include="Util\Effect\ContrastEffect.cs" />
     <Compile Include="Type\Pair.cs" />
