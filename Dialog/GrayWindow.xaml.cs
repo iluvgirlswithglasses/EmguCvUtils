@@ -123,6 +123,12 @@ namespace EmguCvUtils.Dialog
             qdisplay();
         }
 
+        private void applyDilation(object sender, RoutedEventArgs args)
+        {
+            Dilation.Apply(ref canvas.canvas, 4);
+            qdisplay();
+        }
+
         /** @binary effect */
 
         private void applyBinary(object sender, RoutedEventArgs args)

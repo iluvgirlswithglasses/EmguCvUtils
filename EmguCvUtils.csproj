@@ -79,6 +79,8 @@
       <SubType>Designer</SubType>
     </ApplicationDefinition>
     <Compile Include="Algorithm\Segtree\UpdNQry1\Segtree.cs" />
+    <Compile Include="Algorithm\SweepLine\DilationSweepLine.cs" />
+    <Compile Include="Algorithm\SweepLine\Event.cs" />
     <Compile Include="Dialog\ContrastWindow.xaml.cs">
       <DependentUpon>ContrastWindow.xaml</DependentUpon>
     </Compile>
