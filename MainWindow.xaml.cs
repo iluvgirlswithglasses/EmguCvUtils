@@ -76,24 +76,6 @@ namespace EmguCvUtils
             }
         }
 
-        /** @utils-btn-handlers */
-        private void circularCompress(object sender, RoutedEventArgs args)
-        {
-            if (isCircular)
-            {
-                // reset
-                canvas.UpdatePresenter();
-                isCircular = false;
-            }
-            else
-            {
-                // apply circular effect
-                CircularCompress.Apply(ref canvas.presenter);
-                isCircular = true;
-            }
-            display(canvas.ToBitMap());
-        }
-
         /** @keyboard */
         private void onKeyDown(object sender, KeyEventArgs args)
         {
@@ -117,9 +99,33 @@ namespace EmguCvUtils
             display(canvas.ToBitMap());
         }
 
+        /** @utils-btn-handlers */
+        private void circularCompress(object sender, RoutedEventArgs args)
+        {
+            if (isCircular)
+            {
+                // reset
+                canvas.UpdatePresenter();
+                isCircular = false;
+            }
+            else
+            {
+                // apply circular effect
+                CircularCompress.Apply(ref canvas.presenter);
+                isCircular = true;
+            }
+            display(canvas.ToBitMap());
+        }
+
         private void openContrastEditor(object sender, RoutedEventArgs e)
         {
             ContrastWindow dialog = new ContrastWindow(ref canvas);
+            dialog.ShowDialog();
+            display(canvas.ToBitMap());
+        }
+
+        private void openGrayEditor(object sender, RoutedEventArgs e) {
+            GrayWindow dialog = new GrayWindow(ref canvas.canvas);
             dialog.ShowDialog();
             display(canvas.ToBitMap());
         }

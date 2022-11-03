@@ -81,6 +81,9 @@
     <Compile Include="Dialog\ContrastWindow.xaml.cs">
       <DependentUpon>ContrastWindow.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Dialog\GrayWindow.xaml.cs">
+      <DependentUpon>GrayWindow.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Drawer\Dot.cs" />
     <Compile Include="Util\CircularCompress.cs" />
     <Compile Include="Util\Effect\ContrastEffect.cs" />
@@ -92,6 +95,10 @@
     <Compile Include="Util\Binary\SkeletonVariant.cs" />
     <Compile Include="Util\Detector\KeypointsMatching.cs" />
     <Page Include="Dialog\ContrastWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Dialog\GrayWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
