@@ -73,13 +73,34 @@
                 Grid.Column="1"
                 Padding="10">
                 <DockPanel LastChildFill="False">
-                    <!-- file manager -->
-                    <StackPanel DockPanel.Dock="Bottom">
+                    <!-- utils -->
+                    <StackPanel DockPanel.Dock="Top">
                         <Button
                             Click="reload"
                             Content="Reload"
                             FontSize="18" />
                         <Button
+                            Click="applyXSobel"
+                            Content="X-Axis Sobel"
+                            FontSize="18" />
+                        <Button
+                            Click="applyXYSobel"
+                            Content="XY-Axis Sobel"
+                            FontSize="18" />
+                    </StackPanel>
+
+                    <!-- file manager -->
+                    <StackPanel DockPanel.Dock="Bottom">
+                        <TextBlock Text="Write Threshold:" Foreground="#e0e0e0" FontSize="18" />
+                        <Slider 
+                            x:Name="writeThreshold" 
+                            Maximum="255" 
+                            Value="200"
+                            TickPlacement="BottomRight" 
+                            TickFrequency="5"
+                            Margin="0 10 0 10" />
+                        <Button
+                            Click="write"
                             Content="Write"
                             FontSize="18" />
                     </StackPanel>

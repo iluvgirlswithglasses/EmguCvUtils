@@ -6,6 +6,7 @@ using System.Windows.Media.Imaging;
 using Emgu.CV;
 using Emgu.CV.Structure;
 using EmguCvUtils.UIHandler;
+using EmguCvUtils.Util.Detector;
 using static EmguCvUtils.Effect.ContrastEffect;
 
 namespace EmguCvUtils.Dialog
@@ -60,6 +61,16 @@ namespace EmguCvUtils.Dialog
             display(canvas.ToBitMap());
         }
 
+        private void write(object sender, RoutedEventArgs args)
+        {
+            double thresh = writeThreshold.Value;
+            for (int y = 0; y < canvas.canvas.Height; y++)
+                for (int x = 0; x < canvas.canvas.Width; x++)
+                    if (canvas.canvas[y, x].Intensity >= thresh)
+                        src[y, x] = new Bgr(0, canvas.canvas[y, x].Intensity, 0);
+            Close();
+        }
+
         /** @keyboard */
         private void onKeyDown(object sender, KeyEventArgs args)
         {
@@ -83,5 +94,19 @@ namespace EmguCvUtils.Dialog
             display(canvas.ToBitMap());
         }
 
+        /** @util-btns listeners */
+        private void applyXSobel(object sender, RoutedEventArgs args)
+        {
+            SobelOperator.Apply(ref canvas.canvas);
+            canvas.UpdatePresenter();
+            display(canvas.ToBitMap());
+        }
+
+        private void applyXYSobel(object sender, RoutedEventArgs args)
+        {
+            SobelOperator.Apply(ref canvas.canvas, 1);
+            canvas.UpdatePresenter();
+            display(canvas.ToBitMap());
+        }
     }
 }

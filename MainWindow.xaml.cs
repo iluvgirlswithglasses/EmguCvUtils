@@ -76,6 +76,18 @@ namespace EmguCvUtils
             }
         }
 
+       private void saveFile(object sender, RoutedEventArgs args)
+        {
+            var dialog = new Microsoft.Win32.SaveFileDialog();
+            dialog.DefaultExt = ".png";
+            bool? result = dialog.ShowDialog();
+            if (result == true)
+            {
+                string filename = dialog.FileName;
+                CvInvoke.Imwrite(filename, canvas.canvas);
+            }
+        }
+
         /** @keyboard */
         private void onKeyDown(object sender, KeyEventArgs args)
         {
@@ -127,6 +139,7 @@ namespace EmguCvUtils
         private void openGrayEditor(object sender, RoutedEventArgs e) {
             GrayWindow dialog = new GrayWindow(ref canvas.canvas);
             dialog.ShowDialog();
+            canvas.UpdatePresenter();
             display(canvas.ToBitMap());
         }
     }

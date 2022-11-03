@@ -102,6 +102,7 @@
                             Content="Open File"
                             FontSize="18" />
                         <Button 
+                            Click="saveFile"
                             Content="Save as"
                             FontSize="18"/>
                     </StackPanel>
