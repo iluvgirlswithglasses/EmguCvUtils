@@ -125,7 +125,7 @@ namespace EmguCvUtils.Dialog
 
         private void applyDilation(object sender, RoutedEventArgs args)
         {
-            Dilation.Apply(ref canvas.canvas, 4);
+            Dilation.Apply(ref canvas.canvas, 2);
             qdisplay();
         }
 

@@ -136,6 +136,11 @@ namespace EmguCvUtils
             display(canvas.ToBitMap());
         }
 
+        private void openRotationEditor(object sender, RoutedEventArgs e)
+        {
+
+        }
+
         private void openGrayEditor(object sender, RoutedEventArgs e) {
             GrayWindow dialog = new GrayWindow(ref canvas.canvas);
             dialog.ShowDialog();
