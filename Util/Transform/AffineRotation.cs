@@ -44,8 +44,6 @@ namespace EmguCvUtils.Util.Transform
                         res[y, x] = canvas[dy, dx];
                 }
             }
-            //
-            return res;
         }
     }
 }

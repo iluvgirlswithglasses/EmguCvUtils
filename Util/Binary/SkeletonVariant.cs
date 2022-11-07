@@ -10,7 +10,7 @@ namespace EmguCvUtils.Util.Binary
     // which contains just as much information as a skeleton
     // But it runs much faster than Skeletonization would
 
-    internal class SkeletonVariant
+    public class SkeletonVariant
     {
         // (DY[i], DX[i]): relative position of P[i]
         // remember that DY[] is expressed as relative position in MATRIX, not in euclid plane

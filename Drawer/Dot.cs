@@ -3,7 +3,7 @@ using Emgu.CV.Structure;
 
 namespace EmguCvUtils.Drawer
 {
-    internal class Dot
+    static public class Dot
     {
         static public void Rect(ref Image<Bgr, byte> src, int y, int x, int r, Bgr color)
         {

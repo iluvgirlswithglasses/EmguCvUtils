@@ -9,7 +9,7 @@ using Emgu.CV.Structure;
 
 namespace EmguCvUtils.Util.Binary
 {
-    internal class BinaryEffect
+    static public class BinaryEffect
     {
         static public void Apply(ref Image<Gray, byte> src, ref Image<Gray, byte> des, double threshold)
         {

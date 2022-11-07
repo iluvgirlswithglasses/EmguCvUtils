@@ -17,7 +17,7 @@ namespace EmguCvUtils.Util.Binary
     this implementation uses Hilditch's Algorithm
     specifically, the one illustrated in the second link listed above
     */
-    internal class Skeletonization
+    public class Skeletonization
     {
         // (DY[i], DX[i]): relative position of P[i]
         // remember that DY[] is expressed as relative position in MATRIX, not in euclid plane

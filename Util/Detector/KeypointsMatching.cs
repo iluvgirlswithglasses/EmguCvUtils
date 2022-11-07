@@ -18,7 +18,7 @@ namespace EmguCvUtils.Util.Detector
         https://ai.stanford.edu/~syyeung/cvweb/tutorial2.html
         me
     */
-    static class KeypointsMatching
+    static public class KeypointsMatching
     {
         // self-written implementations of Harris Conner Detection and Keypoints Matching
         // are written in the EmguCvDoodle repository

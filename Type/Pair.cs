@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace EmguCvUtils.Type
 {
-    internal class Pair<T, U>
+    public class Pair<T, U>
     {
         public T St { get; set; }
         public U Nd { get; set; }
