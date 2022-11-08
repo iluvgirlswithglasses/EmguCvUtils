@@ -26,8 +26,8 @@ namespace EmguCvUtils.Dialog
 
         private void apply(object sender, RoutedEventArgs args)
         {
-            Apply(ref canvas.canvas, intensity.Value, bias.Value);
-            canvas.UpdatePresenter();
+            Apply(ref canvas.src, intensity.Value, bias.Value);
+            canvas.Reload();
             Close();
         }
     }

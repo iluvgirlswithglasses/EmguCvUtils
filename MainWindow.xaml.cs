@@ -129,10 +129,9 @@ namespace EmguCvUtils
         }
 
         private void openGrayEditor(object sender, RoutedEventArgs e) {
-            GrayWindow dialog = new GrayWindow(ref canvas.canvas);
+            GrayWindow dialog = new GrayWindow(ref canvas.src);
             dialog.ShowDialog();
-            canvas.UpdatePresenter();
-            display(canvas.ToBitMap());
+            affineRotate(null, null);
         }
 
         /** @transformation-btns */
