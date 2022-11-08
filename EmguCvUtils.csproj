@@ -101,6 +101,8 @@
     <Compile Include="Util\Binary\Skeletonization.cs" />
     <Compile Include="Util\Binary\SkeletonVariant.cs" />
     <Compile Include="Util\Detector\KeypointsMatching.cs" />
+    <Compile Include="Util\Scaling\Bicubic2x.cs" />
+    <Compile Include="Util\Scaling\Bilinear2x.cs" />
     <Compile Include="Util\Transform\AffineRotation.cs" />
     <Page Include="Dialog\ContrastWindow.xaml">
       <SubType>Designer</SubType>

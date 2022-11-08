@@ -8,7 +8,6 @@ using Emgu.CV.Structure;
 using EmguCvUtils.UIHandler;
 using EmguCvUtils.Util.Binary;
 using EmguCvUtils.Util.Detector;
-using static EmguCvUtils.Effect.ContrastEffect;
 
 namespace EmguCvUtils.Dialog
 {

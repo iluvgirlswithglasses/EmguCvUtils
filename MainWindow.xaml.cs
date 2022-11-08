@@ -8,6 +8,7 @@ using Emgu.CV.Structure;
 using EmguCvUtils.Dialog;
 using EmguCvUtils.UIHandler;
 using EmguCvUtils.Util;
+using EmguCvUtils.Util.Scaling;
 using EmguCvUtils.Util.Transform;
 
 namespace EmguCvUtils
@@ -76,7 +77,7 @@ namespace EmguCvUtils
             if (result == true)
             {
                 string filename = dialog.FileName;
-                CvInvoke.Imwrite(filename, canvas.canvas);
+                CvInvoke.Imwrite(filename, canvas.src);
             }
         }
 
@@ -139,6 +140,13 @@ namespace EmguCvUtils
         {
             double deg = rotateAngle.Value;
             canvas.Rotate(deg);
+            display(canvas.ToBitMap());
+        }
+
+        /** @scaling-btns */
+        private void bilinear2x(object sender, RoutedEventArgs e)
+        {
+            canvas.LoadNewImage(Bilinear2x.Create(ref canvas.src));
             display(canvas.ToBitMap());
         }
     }

@@ -101,6 +101,9 @@
                             Minimum="-180" Maximum="180" Value="0"
                             TickFrequency="90" TickPlacement="BottomRight" />
                         <Button Content="Rotate" Click="affineRotate" FontSize="18" />
+                        
+                        <!-- scaling -->
+                        <Button Content="Bilinear2x" Click="bilinear2x" FontSize="18" />
                     </StackPanel>
                     
                     <!-- file manager -->
