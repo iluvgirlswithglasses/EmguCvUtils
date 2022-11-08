@@ -7,8 +7,11 @@ namespace EmguCvUtils.UIHandler
 {
     public class WorkingImage<Color> where Color: struct, Emgu.CV.IColor
     {
+        // src: what to write to system
         public Image<Color, byte> src;
+        // canvas: what to work on
         public Image<Color, byte> canvas;
+        // presenter: what is shown to the user
         public Image<Color, byte> presenter;
 
         double zoomScale = 1.0;
