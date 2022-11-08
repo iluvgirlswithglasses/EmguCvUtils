@@ -16,6 +16,10 @@
 - Circular Compression
 - Affine Rotation
 
+# Image Scaling
+
+- Customizable Bilinear Algorithm
+
 # Edge Detector
 
 - Sobel Operator

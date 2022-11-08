@@ -7,8 +7,8 @@ namespace EmguCvUtils.Util.Scaling
 {
     public static class Bilinear2x
     {
-        private static double[] kernel = new double[4]{ 1.414, 0.632, 0.471, 0.632 };
-        private static double sweight = 3.149;
+        private static double[] kernel = new double[4]{ 7.414, 1.632, 0.471, 1.632 };
+        private static double sweight = kernel[0] + kernel[1] + kernel[2] + kernel[3];
 
         public static Image<Bgr, byte> Create(ref Image<Bgr, byte> src)
         {
