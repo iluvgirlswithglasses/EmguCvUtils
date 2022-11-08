@@ -23,7 +23,7 @@ namespace EmguCvUtils.Util.Transform
 
     reversed approach:
         y = - x * sin(a) + y * cos(a)
-        x = + x * sin(a) + y * cos(a)
+        x = + x * cos(a) + y * sin(a)
     */
 
     public static class AffineRotation
