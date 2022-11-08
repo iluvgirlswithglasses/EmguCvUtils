@@ -1,4 +1,5 @@
-﻿using System.Windows;
+﻿using System;
+using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
 using System.Windows.Media.Imaging;
@@ -7,6 +8,7 @@ using Emgu.CV.Structure;
 using EmguCvUtils.Dialog;
 using EmguCvUtils.UIHandler;
 using EmguCvUtils.Util;
+using EmguCvUtils.Util.Transform;
 
 namespace EmguCvUtils
 {
@@ -62,6 +64,7 @@ namespace EmguCvUtils
                 canvas.LoadNewImage(new Image<Bgr, byte>(dialog.FileName));
                 header.Text = dialog.FileName;
                 display(canvas.ToBitMap());
+                Console.WriteLine("Source Image Resolution: {0}x{1}", canvas.canvas.Width, canvas.canvas.Height);
             }
         }
 
@@ -125,15 +128,18 @@ namespace EmguCvUtils
             display(canvas.ToBitMap());
         }
 
-        private void openRotationEditor(object sender, RoutedEventArgs e)
-        {
-
-        }
-
         private void openGrayEditor(object sender, RoutedEventArgs e) {
             GrayWindow dialog = new GrayWindow(ref canvas.canvas);
             dialog.ShowDialog();
             canvas.UpdatePresenter();
+            display(canvas.ToBitMap());
+        }
+
+        /** @transformation-btns */
+        private void affineRotate(object sender, RoutedEventArgs e)
+        {
+            double deg = rotateAngle.Value;
+            canvas.LoadNewImage(AffineRotation.CreateDeg(ref canvas.canvas, deg));
             display(canvas.ToBitMap());
         }
     }

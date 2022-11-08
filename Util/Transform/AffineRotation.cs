@@ -2,6 +2,7 @@
 using Emgu.CV.Structure;
 using Emgu.CV;
 using static System.Math;
+using System.Windows.Controls;
 
 namespace EmguCvUtils.Util.Transform
 {
@@ -19,31 +20,47 @@ namespace EmguCvUtils.Util.Transform
     so with every point P(y, x), after transformation it becomes P'(y', x') where:
         y' = x * sin(a) + y * cos(a)
         x' = x * cos(a) - y * sin(a)
+
+    reversed approach:
+        y = - x * sin(a) + y * cos(a)
+        x = + x * sin(a) + y * cos(a)
     */
 
     public static class AffineRotation
     {
-        static public void Apply(ref Image<Bgr, Byte> canvas, double rad)
+        static public Image<Bgr, Byte> CreateDeg(ref Image<Bgr, Byte> canvas, double deg)
+        {
+            return Create(ref canvas, deg / 90.0 * Acos(0));
+        }
+
+        static public Image<Bgr, Byte> Create(ref Image<Bgr, Byte> src, double rad)
         {
             Image<Bgr, Byte> res = new Image<Bgr, Byte>(
-                canvas.Width, canvas.Height, new Bgr(0, 0, 0)
+                src.Width, src.Height, new Bgr(0, 0, 0)
             );
-            int cy = canvas.Height >> 1, cx = canvas.Width >> 1;
+            int cy = src.Height >> 1, cx = src.Width >> 1;
             //
-            for (int y = 0; y < canvas.Height; y++)
+            for (int y = 0; y < res.Height; y++)
             {
-                for (int x = 0; x < canvas.Width; x++)
+                for (int x = 0; x < res.Width; x++)
                 {
                     // given P', calculate P
 
-                    double py = -cy + y, px = -cx + x;
-                    int dy = (int) Round(- px * Sin(rad) + py * Cos(rad) + cy),
-                        dx = (int) Round(+ px * Cos(rad) + py * Sin(rad) + cx);
+                    int py = -cy + y, px = -cx + x;
+                    int dy = affine(-px, +py, rad) + cy,
+                        dx = affine(+px, +py, rad) + cx;
 
-                    if (0 <= dy && dy < canvas.Height && 0 <= dx && dx < canvas.Width)
-                        res[y, x] = canvas[dy, dx];
+                    if (0 <= dy && dy < src.Height && 0 <= dx && dx < src.Width)
+                        res[y, x] = src[dy, dx];
                 }
             }
+            //
+            return res;
+        }
+
+        static private int affine(int x, int y, double rad)
+        {
+            return (int)Round(x * Sin(rad) + y * Cos(rad));
         }
     }
 }

@@ -93,6 +93,11 @@
                             Click="openGrayEditor"
                             Content="Grayscale Editor"
                             FontSize="18" />
+                        
+                        <!-- affine rotation -->
+                        <TextBlock Margin="0 10 0 0" Text="Angle:" FontSize="18" Foreground="#e0e0e0" />
+                        <Slider x:Name="rotateAngle" Minimum="-180" Maximum="180" Value="0" />
+                        <Button Content="Rotate" Click="affineRotate" FontSize="18" />
                     </StackPanel>
                     
                     <!-- file manager -->
