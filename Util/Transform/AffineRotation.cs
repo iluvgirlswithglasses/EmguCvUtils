@@ -2,7 +2,6 @@
 using Emgu.CV.Structure;
 using Emgu.CV;
 using static System.Math;
-using System.Windows.Controls;
 
 namespace EmguCvUtils.Util.Transform
 {
@@ -26,20 +25,23 @@ namespace EmguCvUtils.Util.Transform
         x = + x * cos(a) + y * sin(a)
     */
 
-    public static class AffineRotation
+    public class AffineRotation<Color> where Color : struct, Emgu.CV.IColor
     {
-        static public Image<Bgr, Byte> CreateDeg(ref Image<Bgr, Byte> canvas, double deg)
+        public AffineRotation()
+        {
+
+        }
+
+        public Image<Color, Byte> CreateDeg(ref Image<Color, Byte> canvas, double deg) 
         {
             return Create(ref canvas, deg / 90.0 * Acos(0));
         }
 
-        static public Image<Bgr, Byte> Create(ref Image<Bgr, Byte> src, double rad)
+        public Image<Color, Byte> Create(ref Image<Color, Byte> src, double rad)
         {
-            Image<Bgr, Byte> res = new Image<Bgr, Byte>(
+            Image<Color, Byte> res = new Image<Color, Byte>(
                 (int) Ceiling(src.Width * Abs(Cos(rad)) + src.Height * Abs(Sin(rad))),
-                (int) Ceiling(src.Width * Abs(Sin(rad)) + src.Height * Abs(Cos(rad))), 
-                new Bgr(0, 0, 0)
-            );
+                (int) Ceiling(src.Width * Abs(Sin(rad)) + src.Height * Abs(Cos(rad))));
             Console.WriteLine("Image Resolution after {0} rad rorated: {1}x{2}", rad, res.Width, res.Height);
             int srcy = src.Height >> 1, srcx = src.Width >> 1;
             int resy = res.Height >> 1, resx = res.Width >> 1;

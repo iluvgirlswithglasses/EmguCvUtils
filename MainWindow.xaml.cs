@@ -139,9 +139,8 @@ namespace EmguCvUtils
         private void affineRotate(object sender, RoutedEventArgs e)
         {
             double deg = rotateAngle.Value;
-            canvas.LoadNewImage(AffineRotation.CreateDeg(ref canvas.canvas, deg));
+            canvas.Rotate(deg);
             display(canvas.ToBitMap());
-            rotateAngle.Value = 0;
         }
     }
 }
