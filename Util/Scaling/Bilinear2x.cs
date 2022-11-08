@@ -48,10 +48,11 @@ namespace EmguCvUtils.Util.Scaling
 
         private static void writeKernel(int y, int x, ref Image<Bgr, byte> src, ref Image<Bgr, byte> res)
         {
-            Bgr[] pts = new Bgr[4] { src[y, x], src[y, x+1], src[y+1, x], src[y+1, x+1] };
-            for (int i = 0; i <= 1; i++)
-                for (int j = 0; j <= 1; j++)
-                    res[1 + i + (y << 1), 1 + j + (x << 1)] = calc(ref pts, (i<<1) + j);
+            Bgr[] pts = new Bgr[4] { src[y, x], src[y, x+1], src[y+1, x+1], src[y+1, x] };
+            res[1 + (y << 1), 1 + (x << 1)] = calc(ref pts, 0);
+            res[1 + (y << 1), 2 + (x << 1)] = calc(ref pts, 1);
+            res[2 + (y << 1), 2 + (x << 1)] = calc(ref pts, 2);
+            res[2 + (y << 1), 1 + (x << 1)] = calc(ref pts, 3);
         }
 
         private static Bgr calc(Bgr x, Bgr y, double wx, double wy)
