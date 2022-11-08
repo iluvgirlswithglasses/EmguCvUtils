@@ -36,19 +36,22 @@ namespace EmguCvUtils.Util.Transform
         static public Image<Bgr, Byte> Create(ref Image<Bgr, Byte> src, double rad)
         {
             Image<Bgr, Byte> res = new Image<Bgr, Byte>(
-                src.Width, src.Height, new Bgr(0, 0, 0)
+                (int) Ceiling(src.Width * Abs(Cos(rad)) + src.Height * Abs(Sin(rad))),
+                (int) Ceiling(src.Width * Abs(Sin(rad)) + src.Height * Abs(Cos(rad))), 
+                new Bgr(0, 0, 0)
             );
-            int cy = src.Height >> 1, cx = src.Width >> 1;
+            Console.WriteLine("Image Resolution after {0} rad rorated: {1}x{2}", rad, res.Width, res.Height);
+            int srcy = src.Height >> 1, srcx = src.Width >> 1;
+            int resy = res.Height >> 1, resx = res.Width >> 1;
             //
             for (int y = 0; y < res.Height; y++)
             {
                 for (int x = 0; x < res.Width; x++)
                 {
                     // given P', calculate P
-
-                    int py = -cy + y, px = -cx + x;
-                    int dy = affine(-px, +py, rad) + cy,
-                        dx = affine(+px, +py, rad) + cx;
+                    int py = y - resy, px = x - resx;
+                    int dy = srcy + (int) Round(- px * Sin(rad) + py * Cos(rad)),
+                        dx = srcx + (int) Round(+ px * Cos(rad) + py * Sin(rad));
 
                     if (0 <= dy && dy < src.Height && 0 <= dx && dx < src.Width)
                         res[y, x] = src[dy, dx];
@@ -56,11 +59,6 @@ namespace EmguCvUtils.Util.Transform
             }
             //
             return res;
-        }
-
-        static private int affine(int x, int y, double rad)
-        {
-            return (int)Round(x * Sin(rad) + y * Cos(rad));
         }
     }
 }
