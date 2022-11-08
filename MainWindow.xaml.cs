@@ -141,6 +141,7 @@ namespace EmguCvUtils
             double deg = rotateAngle.Value;
             canvas.LoadNewImage(AffineRotation.CreateDeg(ref canvas.canvas, deg));
             display(canvas.ToBitMap());
+            rotateAngle.Value = 0;
         }
     }
 }
